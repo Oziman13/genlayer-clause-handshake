@@ -12,7 +12,7 @@ When both sign the same list of locked clauses, the deal is agreed and the contr
 * `scripts/mutation_check.py`: breaks the contract on purpose in 63 ways (57 caught, the 6 that survive cannot change a result; see `evidence/mutation-checks.txt`).
 * `evidence/`: the outputs of those runs.
 
-Status: **v0.1.0, tested in memory and on a local network with a mocked model; not deployed to any public network yet.** See [Live run](#live-run) and [What it does not show](#what-it-does-not-show).
+Status: **v0.1.0, deployed on Studionet at `0x641c881fb64d3e0c365c44a8a546627D7b96A03F`; tested in memory and on a local network with a mocked model.** See [Live run](#live-run) and [What it does not show](#what-it-does-not-show).
 
 ## Why a contract for this
 
@@ -95,10 +95,12 @@ network are identical for every validator.
 
 ## Live run
 
-None yet. The contract has not been deployed to Studionet or any other public network, so there is no address and there are no
-transaction hashes, and **it has never been run with a real model**. What exists: 95 in-memory tests and 5 tests on a local
-5-validator simulator (the model is mocked in both), and the mutation check (outputs in `evidence/`). Whether a real model spots a
-contradiction, and whether real validators settle on the same verdict and clause, is untested.
+Deployed on Studionet (GenLayer Studio) on 2026-10-30 at `0x641c881fb64d3e0c365c44a8a546627D7b96A03F`
+([Explorer](https://explorer-studio.genlayer.com/address/0x641c881fb64d3e0c365c44a8a546627D7b96A03F)); the deploy transaction reached `FINALIZED`. That is the only
+thing done on the public network: no `open_deal`, `propose`, `respond` or `sign` call has been made there yet, and **the contract
+has never been run with a real model**. What backs the logic is the testing with the model mocked: 95 in-memory tests, 5 tests on
+a local 5-validator simulator, and the mutation check (outputs in `evidence/`). Whether a real model spots a contradiction, and
+whether real validators settle on the same verdict and clause, is untested.
 
 ## Try it
 
