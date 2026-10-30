@@ -1,0 +1,28 @@
+Clause Handshake v0.1.0 -- mutation check, run on 2026-10-30 (UTC)
+python3 scripts/mutation_check.py
+
+base: tests pass on the unmodified contract
+SURVIVED: model answer cap
+SURVIVED: quote max 301
+SURVIVED: quote spacing sensitive
+SURVIVED: lock past six
+SURVIVED: validator size cap
+SURVIVED: clause number unbounded above
+mutants: 63, killed: 57, survived: 6
+ - model answer cap
+ - quote max 301
+ - quote spacing sensitive
+ - lock past six
+ - validator size cap
+ - clause number unbounded above
+
+The six survivors are changes that cannot alter any result in this contract, not missing tests:
+ - model answer cap (MAX_MODEL 4000 -> 4001): exec_prompt(response_format="json") hands the contract an already parsed object, so the
+   string-length guard is only reachable with a raw string answer, which the test harness cannot produce.
+ - quote max 301: a quote is only accepted when it appears inside a clause, and a clause has at most 300 characters.
+ - quote spacing sensitive: the quote is already squashed by the parser (and required to be squashed by the validator) before the
+   anchor test, and stored clauses are squashed on input, so the second squash inside the anchor test is redundant.
+ - lock past six (in respond): propose() already refuses a seventh clause, so a sixth-plus lock cannot be reached.
+ - validator size cap (2000 -> 2001): a canonical valid reading is far shorter than 2000 characters (quote at most 300).
+ - clause number unbounded above: a clause number past the last clause raises IndexError inside the reading, which is caught and
+   becomes ERROR, the same outcome as the explicit range check.

@@ -1,0 +1,9 @@
+Clause Handshake v0.1.0 -- local network (glsim, 5 validators), run on 2026-10-30 (UTC)
+python3 -m pytest tests/glsim -v   (model mocked identically on every validator)
+
+tests/glsim/test_clause_handshake_network.py::test_a_deal_runs_from_opening_to_agreement_through_five_validators PASSED
+tests/glsim/test_clause_handshake_network.py::test_a_badly_formed_model_answer_changes_nothing PASSED
+tests/glsim/test_clause_handshake_network.py::test_a_quote_that_is_not_in_the_clause_is_not_a_verdict PASSED
+tests/glsim/test_clause_handshake_network.py::test_turns_and_parties_are_enforced PASSED
+tests/glsim/test_clause_handshake_network.py::test_a_deal_expires_after_seven_days PASSED
+============================== 5 passed in 7.36s ===============================
